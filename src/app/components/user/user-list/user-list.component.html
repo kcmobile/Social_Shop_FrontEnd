@@ -1,0 +1,116 @@
+<!-- Header -->
+<app-header></app-header>
+<!-- Sidebar -->
+<app-sidebar></app-sidebar>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User List</h3>
+                            <input type="text" [(ngModel)]="searchText" class="float-right  mr-2 box-search"
+                                placeholder="Search">
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table id="example2" class="table table-bordered table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.No</th>
+                                            <th>Image</th>
+                                            <th>Name</th>
+                                            <th>User Name</th>
+                                            <th>Account Type</th>
+                                            <th>Account Status</th>
+                                            <th>More Info</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr
+                                            *ngFor="let user of users| filter: searchText| paginate: { itemsPerPage: 20, currentPage: p };let i=index;">
+                                            <td>{{i+1}}</td>
+                                            <td><img src="{{baseUrl+user.photo}}" class="rounded-circle" alt=""
+                                                width="60" height="60">
+                                            </td>
+                                            <td>{{user.name}}</td>
+                                            <td>{{user.username}}</td>
+                                            <td>{{user.accountType}}</td>
+                                            <td>{{user.accountStatus}}</td>
+                                            <td>
+                                                <button type="button" class="btn btn-success btn-sm mr-2"
+                                                    (click)="details(user.id)">
+                                                    <i class="ionicons ion-ios-eye"></i>
+                                                </button>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex justify-content-center">
+                                                    <label class="switch">
+                                                        <input type="checkbox" [checked]="user.isActive"
+                                                            (click)="userStatus(user.id, i, user.isActive)">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        (click)="openUserDelete(form_user_delete,i,user)">
+                                                        <i class="ionicons ion-android-delete"></i>
+                                                    </button>
+                                                </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr *ngIf="users.length ==0">
+                                            <td colspan="5" align="center" class="text-danger">User not found!</td>
+                                        </tr>
+
+                                    </tbody>
+                                    <tfoot>
+                                        <tr>
+                                            <td colspan="12" align="right">
+                                                <pagination-controls (pageChange)="p = $event"></pagination-controls>
+                                            </td>
+                                        </tr>
+                                    </tfoot>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+                <!-- /.col -->
+            </div>
+        </div>
+        <!-- /.row -->
+    </section>
+    <!-- /.content -->
+    <!-- Edit Category -->
+
+
+
+    <ng-template #form_user_delete let-modal>
+        <div class="card-body">
+            <p class="text-center">Are you sure? You want to delete this user</p>
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer text-center">
+            <button class="btn btn-dark mr-2" (click)="modal.dismiss('Cross click')">Cancel</button>
+            <button type="submit" class="btn btn-primary ml-2" (click)="delete()">Delete</button>
+        </div>
+    </ng-template>
+</div>
+<app-footer></app-footer>

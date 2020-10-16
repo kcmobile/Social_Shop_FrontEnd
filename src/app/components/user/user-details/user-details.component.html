@@ -1,0 +1,169 @@
+<!-- Header -->
+<app-header></app-header>
+<!-- Sidebar -->
+<app-sidebar></app-sidebar>
+
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+        <div class="container-fluid">
+
+        </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">User Detail</h3>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="row justify-content-center">
+                                                <div class="col-md-12">
+                                                    <div class="text-center">
+                                                        <label for="">User Image</label>
+                                                        <div class="bg-custome text-center rounded-0">
+                                                            <div class="user_img">
+                                                                <img src="{{baseUrl+data.photo}}" class="rounded" alt=""
+                                                                    width="140" height="140">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-8">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <label for="">Name -</label>
+                                                    <span class="ml-2">{{data.name | titlecase}}</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="">Email ID -</label>
+                                                    <span class="ml-2">{{data.email}}</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="">User Name -</label>
+                                                    <span class="ml-2">{{data.username}}</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="">Account Type -</label>
+                                                    <span class="ml-2">{{data.accountType}}</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="">Account Status -</label>
+                                                    <span class="ml-2">{{data.accountStatus}}</span>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <label for="">Action -</label>
+                                                    <!-- <label class="switch">
+                                                        <input type="checkbox" [checked]="datasActive"
+                                                            (click)="userStatus(data.id, i, data.isActive)">
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                    <button type="button" class="btn btn-danger btn-sm"
+                                                        (click)="openUserDelete(form_user_delete,i,user)">
+                                                        <i class="ionicons ion-android-delete"></i>
+                                                    </button> -->
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12 mt-5">
+                                    <tabset [justified]="true" (tabChange)="beforeChange($event)">
+                                        <tab heading="Orders" id="tab1" (selectTab)="tab(0)">
+                                        </tab>
+                                        <tab heading="Address Book" id="tab2" (selectTab)="tab(1)">
+                                        </tab>
+                                    </tabset>
+                                    <!-- Main content -->
+                                    <section class="content">
+                                        <div class="container-fluid">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <div class="card">
+                                                        <div class="card-header">
+                                                            <!-- <button type="button"
+                                                                class="btn btn-success btn-sm float-right mt-1"
+                                                                (click)="export_data()">Export</button> -->
+                                                            <input type="text" [(ngModel)]="searchText"
+                                                                class="float-right  mr-2 box-search"
+                                                                placeholder="Search">
+                                                        </div>
+                                                        <!-- /.card-header -->
+                                                        <div class="card-body">
+                                                            <div class="table-responsive">
+                                                                <table id="example2"
+                                                                    class="table table-bordered table-hover">
+                                                                    <thead>
+                                                                        <tr>
+                                                                            <th>Sr.No</th>
+                                                                            <th>Book Name</th>
+                                                                            <th>Author Name</th>
+                                                                            <th>Chapters</th>
+                                                                            <th>{{this.activeTab==0?'Premium Date':'Date'}}
+                                                                            </th>
+                                                                            <th> {{this.activeTab==0?'Price':'Book Type'}}
+                                                                            </th>
+                                                                    </thead>
+                                                                    <tbody>
+                                                                        <tr
+                                                                            *ngFor="let data of tableData| filter: searchText| paginate: { itemsPerPage: 20, currentPage: p };let i=index;">
+                                                                            <td>{{i+1}}</td>
+                                                                            <td>{{data.books.title}}</td>
+                                                                            <td>{{data.books.author.name}}</td>
+                                                                            <td>{{data.books.books_chapter_count}}</td>
+                                                                            <td>{{data.created_at | date:'mediumDate'}}
+                                                                            </td>
+                                                                            <td>{{data.books.type ==0?'Free':'Premium'}}
+                                                                            </td>
+                                                                        </tr>
+                                                                        <tr *ngIf="tableData.length ==0">
+                                                                            <td colspan="5" align="center"
+                                                                                class="text-danger">Book not found!</td>
+                                                                        </tr>
+                                                                    </tbody>
+                                                                    <tfoot>
+                                                                        <tr>
+                                                                            <td colspan="12" align="right">
+                                                                                <pagination-controls
+                                                                                    (pageChange)="p = $event">
+                                                                                </pagination-controls>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </tfoot>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <!-- /.card-body -->
+                                                    </div>
+                                                    <!-- /.card -->
+                                                </div>
+                                                <!-- /.col -->
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+                                    </section>
+                                    <!-- /.content -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

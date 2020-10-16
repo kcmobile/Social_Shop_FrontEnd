@@ -1,0 +1,16 @@
+.brand-link{
+    text-align: center;
+    
+}
+.sidebar-mini.sidebar-open .logo-unclop{
+    display: block;
+}
+.sidebar-mini.sidebar-open.sidebar-collapse  .logo-unclop{
+    display: none;
+}
+.sidebar-mini.sidebar-open .logo-clop{
+    display: none;
+}
+.sidebar-mini.sidebar-open.sidebar-collapse  .logo-clop{
+    display: block;
+}

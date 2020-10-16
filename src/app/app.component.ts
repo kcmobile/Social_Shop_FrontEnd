@@ -7,4 +7,6 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Social-Shop-FrontEnd';
+  public loading = false;
+  location: Location;
 }
