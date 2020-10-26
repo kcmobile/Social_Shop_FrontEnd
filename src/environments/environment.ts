@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  apiUrl: "http://127.0.0.1:3333/api/auth/admin/",
-  bucketUrl: "https://audioreader.s3.eu-central-1.amazonaws.com/"
+  apiUrl: "http://localhost:3333/api/auth/admin/",
+  bucketUrl: "https://s3.ap-south-1.amazonaws.com/boba-files/"
 };
 
 /*
